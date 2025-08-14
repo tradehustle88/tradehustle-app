@@ -1,0 +1,97 @@
+# TradeHustle Backend – Full Execution Spec
+
+## 1. Overview
+This backend powers TradeHustle’s multi-agent AI ecosystem, Shopify/Firebase integration, and real-time resume editor. Designed for **speed, scalability, and plug-and-play deployment**.
+
+---
+
+## 2. Core Tech Stack
+- **Python 3.11+** – Main backend runtime
+- **Node.js 20+** – Frontend bundling + auxiliary API services
+- **FastAPI** – Primary API layer
+- **Firebase** – Hosting, Firestore DB, Authentication
+- **Shopify Admin API** – Product, order, and digital delivery management
+- **Docker** – Local + cloud containerization
+- **NGINX** – Reverse proxy, SSL termination
+- **GitHub Actions** – CI/CD automation
+- **PostgreSQL** (optional) – For long-term structured data storage
+
+---
+
+## 3. AI Agent Integrations
+- **OpenAI GPT-4.1 Turbo** – Resume content generation, chatbot
+- **Anthropic Claude 3.5 Sonnet** – Long-form content refinement + reasoning
+- **Perplexity API** – Real-time research + knowledge lookups
+- **Google Gemini 1.5 Pro** – Trade data insights + image-to-text pipelines
+- **Abacus.AI** – Model orchestration + ensemble logic
+- **Python automation layer** – Custom scripts for batching, preprocessing, and post-processing AI outputs
+
+---
+
+## 4. API Endpoints
+### Public:
+- `POST /resume/generate` → Takes trade type + keywords, returns AI-generated resume
+- `GET /trades/list` → Returns all supported trade career types
+- `POST /resume/editor` → One-time edit session with AI
+
+### Internal:
+- `POST /shopify/order-webhook` → Fires on purchase to trigger digital delivery
+- `POST /ai/batch-process` → Runs queued AI jobs across multiple agents
+- `GET /analytics/dashboard` → Returns backend KPIs for admin panel
+
+---
+
+## 5. Scaling Strategy
+- **Initial Phase:** Firebase hosting + single-region Firestore
+- **Phase 2:** Move heavy AI calls to Cloud Run + Vertex AI endpoints
+- **Phase 3:** Multi-region deployment with CDN caching and load balancing
+- **Long-term:** Kubernetes orchestration for peak traffic resilience
+
+---
+
+## 6. Setup Instructions
+```bash
+# 1. Clone repo
+git clone git@github.com:tradehustle88/tradehustle-app.git
+cd tradehustle-app
+
+# 2. Install dependencies
+pip install -r requirements.txt
+npm install
+
+# 3. Environment setup
+cp .env.example .env
+bash scripts/setup.sh
+
+# 4. Run locally
+docker-compose up --build
+```
+
+---
+
+## 7. Environment Variables (`.env`)
+```
+OPENAI_API_KEY=...
+ANTHROPIC_API_KEY=...
+PERPLEXITY_API_KEY=...
+GEMINI_API_KEY=...
+ABACUS_API_KEY=...
+SHOPIFY_API_KEY=...
+SHOPIFY_API_SECRET=...
+FIREBASE_PROJECT_ID=...
+POSTGRES_URL=...
+```
+
+---
+
+## 8. Deployment Flow
+1. Push changes to `main`
+2. GitHub Actions → Build & test → Deploy to Firebase + Cloud Run
+3. Verify SSL + DNS via NGINX config
+4. Test Shopify webhook triggers
+5. Confirm AI agents respond within < 3s latency
+
+---
+
+## 9. License
+MIT License – See LICENSE file for details.
