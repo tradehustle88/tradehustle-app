@@ -1,0 +1,6 @@
+GET http://localhost:8080/api/health
+
+POST http://localhost:8080/api/lead/subscribe
+Content-Type: application/json
+
+{"email":"dev@example.com"}
